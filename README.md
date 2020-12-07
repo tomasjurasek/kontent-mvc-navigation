@@ -1,7 +1,7 @@
 # kontent-mvc-navigation
 
 
-> :warning: This README is under consruction. :warning:
+> :warning: This README is under construction. :warning:
 
 ## Application setup
 
