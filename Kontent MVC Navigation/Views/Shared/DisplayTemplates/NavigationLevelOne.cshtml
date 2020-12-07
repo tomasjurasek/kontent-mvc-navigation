@@ -1,0 +1,19 @@
+﻿@model KenticoKontentModels.Page
+@{
+    Layout = null;
+}
+
+@if (Model.Content.Count() == 0 && Model.Subpages.Count() == 0)
+{
+    <li>
+        <a asp-controller="Errors" 
+           asp-action="Error" 
+           asp-route-code="404">@Model.Title</a>
+    </li>
+}
+else
+{
+    <li>
+        <a asp-route=@Model.Url>@Model.Title</a>
+    </li>
+}

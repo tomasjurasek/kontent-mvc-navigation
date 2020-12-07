@@ -1,0 +1,11 @@
+﻿@using KenticoKontentModels
+@model List<Article>
+
+<h3>Articles View</h3>
+
+<a asp-route="show-article" asp-route-codename="on-roasts">On Roasts</a>
+
+@foreach(Article article in Model)
+{
+    @Html.DisplayFor(list => article, "ArticleListing")
+}

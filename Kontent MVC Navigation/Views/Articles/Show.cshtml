@@ -1,0 +1,11 @@
+﻿@model KenticoKontentModels.Article
+
+<div>
+    <h2>@Model.Title</h2>
+    <div>
+        <img src=@Model.TeaserImage.FirstOrDefault().Url height="50%" width="50%" />
+    </div>
+    <div>
+        @Html.DisplayFor(vm => vm.BodyCopy)
+    </div>
+</div>
