@@ -23,7 +23,7 @@ namespace Kontent_MVC_Navigation.Views.Shared.Components.Navigation
         {
             // Get the root navigation item from Kontent
             IDeliveryItemResponse<Homepage> response = await _deliveryClient.GetItemAsync<Homepage>("homepage", 
-                new DepthParameter(2)
+                new DepthParameter(3)
                 );
 
             var homepage = response.Item;

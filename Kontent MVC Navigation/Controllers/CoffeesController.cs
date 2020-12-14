@@ -2,45 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Kentico.Kontent.Delivery.Abstractions;
 using Kentico.Kontent.Delivery.Urls.QueryParameters.Filters;
 using KenticoKontentModels;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace Kontent_MVC_Navigation.Controllers
 {
-    public class ArticlesController : Controller
+    public class CoffeesController : Controller
     {
         private readonly IDeliveryClient _deliveryClient;
 
-        public ArticlesController(IDeliveryClient deliveryClient)
+        public CoffeesController(IDeliveryClient deliveryClient)
         {
             _deliveryClient = deliveryClient;
         }
 
-        [Route("articles", Name = "articles")]
+        [Route("product-catalog/coffees", Name = "coffees")]
         public async Task<IActionResult> Index()
         {
-            var response = await _deliveryClient.GetItemsAsync<Article>(
-                new EqualsFilter("system.type", "article")
+            var response = await _deliveryClient.GetItemsAsync<Coffee>(
+                new EqualsFilter("system.type", "coffee")
                 );
 
-            var articles = response.Items;
+            var coffees = response.Items;
 
-            return View(articles);
+            return View(coffees);
         }
 
-        [Route("articles/{url_pattern}", Name = "show-article")]
+        [Route("product-catalog/coffees/{url_pattern}", Name = "show-coffee")]
         public async Task<IActionResult> Show(string url_pattern)
         {
-            var response = await _deliveryClient.GetItemsAsync<Article>(
+            var response = await _deliveryClient.GetItemsAsync<Coffee>(
                 new EqualsFilter("elements.url_pattern", url_pattern)
                 );
 
-            var article = response.Items.FirstOrDefault();
+            var coffee = response.Items.FirstOrDefault();
 
-            return View(article);
+            return View(coffee);
         }
     }
 }

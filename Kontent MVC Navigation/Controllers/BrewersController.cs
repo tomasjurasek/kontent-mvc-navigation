@@ -2,45 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Kentico.Kontent.Delivery.Abstractions;
 using Kentico.Kontent.Delivery.Urls.QueryParameters.Filters;
 using KenticoKontentModels;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace Kontent_MVC_Navigation.Controllers
 {
-    public class ArticlesController : Controller
+    public class BrewersController : Controller
     {
         private readonly IDeliveryClient _deliveryClient;
 
-        public ArticlesController(IDeliveryClient deliveryClient)
+        public BrewersController(IDeliveryClient deliveryClient)
         {
             _deliveryClient = deliveryClient;
         }
 
-        [Route("articles", Name = "articles")]
+        [Route("product-catalog/brewers", Name = "brewers")]
         public async Task<IActionResult> Index()
         {
-            var response = await _deliveryClient.GetItemsAsync<Article>(
-                new EqualsFilter("system.type", "article")
+            var response = await _deliveryClient.GetItemsAsync<Brewer>(
+                new EqualsFilter("system.type", "brewer")
                 );
 
-            var articles = response.Items;
+            var brewers = response.Items;
 
-            return View(articles);
+            return View(brewers);
         }
 
-        [Route("articles/{url_pattern}", Name = "show-article")]
+        [Route("product-catalog/brewers/{url_pattern}", Name = "show-brewer")]
         public async Task<IActionResult> Show(string url_pattern)
         {
-            var response = await _deliveryClient.GetItemsAsync<Article>(
+            var response = await _deliveryClient.GetItemsAsync<Brewer>(
                 new EqualsFilter("elements.url_pattern", url_pattern)
                 );
 
-            var article = response.Items.FirstOrDefault();
+            var brewer = response.Items.FirstOrDefault();
 
-            return View(article);
+            return View(brewer);
         }
     }
 }

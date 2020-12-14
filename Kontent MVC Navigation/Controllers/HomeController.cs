@@ -23,7 +23,7 @@ namespace Kontent_MVC_Navigation.Controllers
         }
 
         [Route("")]
-        [Route("Home")]
+        [Route("home")]
         public IActionResult Index()
         {
             return View();

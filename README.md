@@ -37,11 +37,13 @@ If you already have a [Kentico Kontent account](https://app.kontent.ai), you can
 ```
 
 ## Web Spotlight
-Web Spotlight is used throughout the blog series and dictates the structure of the navigation menu.  Web Spotlight is an additional (optional) tool for Kentico Kontent focused on website management. For this project, it allows for:
+> **Note**: The showcased navigation can be setup without Web Spotlight by manually creating the [Homepage](https://docs.kontent.ai/tutorials/manage-kontent/projects/set-up-web-spotlight#a-homepage-in-web-spotlight) and [Page](https://docs.kontent.ai/tutorials/manage-kontent/projects/set-up-web-spotlight#a-page-in-web-spotlight) content types.
+
+Web Spotlight is used throughout the blog series and dictates the structure of the navigation menu.  It is an additional (optional) tool for Kentico Kontent focused on website management. For this project, it allows for:
 
 *   Seeing the hierarchy of the navigation in a page tree 
 *   Creating new pages from the page tree
-*   Previewing of changes in Kontent
+*   Previewing changes in the Kontent UI
 
 Web Spotlight is a paid feature and must be activated by a member of the Kentico Kontent Sales team for your subscription before it can be used. More information about Web Spotlight and activation can be seen in the [official Kentico Kontent documentation](https://docs.kontent.ai/tutorials/set-up-kontent/set-up-your-project/web-spotlight "Web Spotlight documentation").
 
@@ -55,4 +57,8 @@ Web Spotlight uses Kentico Kontent's "Preview" functionality in order to show th
 
 More details about setting up preview and Web Spotlight can be seen in the [official Kentico Kontent documentation.](https://docs.kontent.ai/tutorials/develop-apps/build-strong-foundation/set-up-preview "Kontent Documentation - set up preview for content items")
 
-**Note:** Preview URLs require an `https://` protocol and a URL accessible to Kontent. Without a valid SSL certificate, Kontent responds with secure connection errors. When developing apps locally, see how to [serve pages over HTTPS](https://create-react-app.dev/docs/using-https-in-development/) in combination with [ngrok](https://ngrok.com/docs)'s forwarded address.
+> **Note:** Preview URLs require an `https://` protocol and a URL accessible to Kontent. Without a valid SSL certificate, Kontent responds with secure connection errors. When developing apps locally, see how to [serve pages over HTTPS](https://create-react-app.dev/docs/using-https-in-development/) in combination with [ngrok](https://ngrok.com/docs)'s forwarded address.
+
+### Importing the blog post boilerplate
+
+> :warning: Under construction

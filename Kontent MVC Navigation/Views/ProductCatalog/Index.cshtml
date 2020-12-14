@@ -1,2 +1,11 @@
-﻿
+﻿@using KenticoKontentModels
+@model Page
+
 <h3>Product Catalog</h3>
+
+@foreach(Page product in Model.Subpages)
+{
+<div>
+    <h3><a asp-route=@product.Url>@product.Title</a></h3>
+</div>
+}

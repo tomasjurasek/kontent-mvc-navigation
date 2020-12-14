@@ -1,0 +1,28 @@
+﻿@model KenticoKontentModels.Coffee
+@{
+    ViewBag.Title = @Model.ProductName;
+}
+
+<div>
+    <h2>@Model.ProductName</h2>
+    <div>
+        <img src=@Model.Image.FirstOrDefault().Url height="50%" width="50%" />
+    </div>
+    <div>
+        <h3>Details</h3>
+        <ul>
+            <li>
+                Price: @Model.Price
+            </li>
+            <li>
+                Farm: @Model.Farm
+            </li>
+            <li>
+                Variety: @Model.Variety
+            </li>
+        </ul>
+    </div>
+    <div>
+        @Html.DisplayFor(vm => vm.LongDescription)
+    </div>
+</div>
