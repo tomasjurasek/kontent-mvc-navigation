@@ -8,7 +8,7 @@ namespace Kontent_MVC_Navigation.Controllers
 {
     public class ProductCatalogController : Controller
     {
-        [Route("ProductCatalog", Name = "product-catalog")]
+        [Route("product-catalog", Name = "product-catalog")]
         public IActionResult Index()
         {
             return View();

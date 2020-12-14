@@ -19,7 +19,7 @@ namespace Kontent_MVC_Navigation.Controllers
             _deliveryClient = deliveryClient;
         }
 
-        [Route("Articles", Name = "articles")]
+        [Route("articles", Name = "articles")]
         public async Task<IActionResult> Index()
         {
             // Get the root navigation item from Kontent
@@ -32,7 +32,7 @@ namespace Kontent_MVC_Navigation.Controllers
             return View(articles);
         }
 
-        [Route("Articles/{url_pattern}", Name = "show-article")]
+        [Route("articles/{url_pattern}", Name = "show-article")]
         public async Task<IActionResult> Show(string url_pattern)
         {
             // Get the root navigation item from Kontent
