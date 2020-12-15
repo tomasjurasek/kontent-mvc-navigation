@@ -34,19 +34,17 @@ namespace Kontent_MVC_Navigation
             // Enable configuration services
             services.AddOptions();
 
-            services.AddLocalizedRouting();
-            services.AddControllersWithViews();
-
-            // README from localization package suggests that Customized provider is not necessary for basic routing
-            //services.AddSingleton<ILocalizedRoutingProvider, CustomLocalizedRouteProvider>();
-
-            services.AddSingleton<CustomLocalizedRoutingTranslationTransformer>();
-
-            services.AddLocalization();
-
             // Kontent services
             services.AddSingleton<ITypeProvider, CustomTypeProvider>()
                     .AddDeliveryClient(Configuration);
+
+
+            services.AddLocalization();
+            services.ConfigureRequestLocalization("en-US", "es-ES");
+            services.AddSingleton<CustomLocalizedRoutingTranslationTransformer>();
+            services.AddControllersWithViews();
+            services.AddLocalizedRouting();
+
 
         }
 
@@ -72,25 +70,12 @@ namespace Kontent_MVC_Navigation
 
             app.UseRouting();
 
-            var supportedCultures = new[]
-{
-                    new CultureInfo("es-ES"),
-                    new CultureInfo("en-US"),
-                };
 
-            app.UseRequestLocalization(new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("en-US"),
-                SupportedCultures = supportedCultures,
-                SupportedUICultures = supportedCultures
-            });
-
-            app.UseAuthorization();
+            app.UseRequestLocalization();
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllers();
-                endpoints.MapDynamicControllerRoute<CustomLocalizedRoutingTranslationTransformer>("{culture}/{controller}/{action}/{id?}");
+                endpoints.MapDynamicControllerRoute<CustomLocalizedRoutingTranslationTransformer>("{culture=en-US}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute("default", "{culture=en-US}/{controller=Home}/{action=Index}/{id?}");
             });
         }
