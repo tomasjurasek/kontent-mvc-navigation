@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Kentico.AspNetCore.LocalizedRouting" Version="1.0.0-beta2" />
     <PackageReference Include="Kentico.Kontent.Delivery" Version="14.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>

@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Kentico.Kontent.Delivery.Abstractions;
 using Kentico.Kontent.Delivery.Urls.QueryParameters.Filters;
 using KenticoKontentModels;
-
+using Kentico.AspNetCore.LocalizedRouting.Attributes;
+using Kentico.Kontent.Delivery.Urls.QueryParameters;
+using System.Threading;
 
 namespace Kontent_MVC_Navigation.Controllers
 {
@@ -18,8 +20,12 @@ namespace Kontent_MVC_Navigation.Controllers
         {
             _deliveryClient = deliveryClient;
         }
+    
+        // original, single culture attribute routing
+        //[Route("articles", Name = "articles")]
 
-        [Route("articles", Name = "articles")]
+        [LocalizedRoute("en-US", "articles")]
+        [LocalizedRoute("es-ES", "articulos")]
         public async Task<IActionResult> Index()
         {
             var response = await _deliveryClient.GetItemsAsync<Article>(

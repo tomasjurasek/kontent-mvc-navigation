@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -8,9 +9,13 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Kentico.Kontent.Delivery.Abstractions;
 using Kentico.Kontent.Delivery.Extensions;
 using KenticoKontentModels;
+using Kontent_MVC_Navigation.Infrastructure;
+using Kentico.AspNetCore.LocalizedRouting.Extensions;
+using Kentico.AspNetCore.LocalizedRouting;
 
 namespace Kontent_MVC_Navigation
 {
@@ -29,11 +34,20 @@ namespace Kontent_MVC_Navigation
             // Enable configuration services
             services.AddOptions();
 
+            services.AddLocalizedRouting();
+            services.AddControllersWithViews();
+
+            // README from localization package suggests that Customized provider is not necessary for basic routing
+            //services.AddSingleton<ILocalizedRoutingProvider, CustomLocalizedRouteProvider>();
+
+            services.AddSingleton<CustomLocalizedRoutingTranslationTransformer>();
+
+            services.AddLocalization();
+
             // Kontent services
             services.AddSingleton<ITypeProvider, CustomTypeProvider>()
                     .AddDeliveryClient(Configuration);
 
-            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,11 +72,26 @@ namespace Kontent_MVC_Navigation
 
             app.UseRouting();
 
+            var supportedCultures = new[]
+{
+                    new CultureInfo("es-ES"),
+                    new CultureInfo("en-US"),
+                };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
+                endpoints.MapDynamicControllerRoute<CustomLocalizedRoutingTranslationTransformer>("{culture}/{controller}/{action}/{id?}");
+                endpoints.MapControllerRoute("default", "{culture=en-US}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
