@@ -23,35 +23,48 @@ namespace Kontent_MVC_Navigation.Controllers
         {
             _deliveryClient = deliveryClient;
         }
-    
-        // original, single culture attribute routing
-        //[Route("articles", Name = "articles")]
 
         [LocalizedRoute("en-US", "")]
         [LocalizedRoute("es-ES", "")]
         public async Task<IActionResult> Index()
         {
             var response = await _deliveryClient.GetItemsAsync<Article>(
-                new EqualsFilter("system.type", "article")
+                new EqualsFilter("system.type", "article"),
+                new EqualsFilter("system.language", CultureInfo.CurrentCulture.Name), // disable language fallback
+                new LanguageParameter(CultureInfo.CurrentCulture.Name)
                 );
 
             var articles = response.Items;
 
-            return View(articles);
+            if (articles.Count > 0)
+            {
+                return View(articles);
+            }
+            else
+            {
+                return NotFound(404);
+            }
+
         }
 
-        [LocalizedRoute("en-US", "Show")]
-        [LocalizedRoute("es-ES", "Mostrar")]
+        [LocalizedRoute("en-US", "show")]
+        [LocalizedRoute("es-ES", "mostrar")]
         public async Task<IActionResult> Show(string url_pattern)
         {
+            if(url_pattern != null) { 
             var response = await _deliveryClient.GetItemsAsync<Article>(
-                new EqualsFilter("elements.url_pattern", url_pattern)/*,
-                new LanguageParameter(CultureInfo.CurrentCulture.Name)*/
+                new EqualsFilter("elements.url_pattern", url_pattern),
+                new LanguageParameter(CultureInfo.CurrentCulture.Name)
                 );
 
-            var article = response.Items.FirstOrDefault();
+                var article = response.Items.FirstOrDefault();
 
-            return View(article);
+                return View(article);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
     }
 }

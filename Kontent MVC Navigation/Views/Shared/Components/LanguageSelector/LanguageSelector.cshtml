@@ -1,0 +1,25 @@
+﻿@using System.Globalization 
+@model LanguageSwitcher
+@{
+}
+
+<div>
+    Language selector:
+    <ul>
+        @foreach (CultureInfo ci in Model.SupportedCultures)
+        {
+            if (Model.CurrentController != null && Model.CurrentAction != null)
+            {
+                <a asp-route-culture=@ci.Name
+                   asp-controller=@Model.CurrentController
+                   asp-action=@Model.CurrentAction>@ci.NativeName</a>
+            }
+            else
+            {
+                <a asp-route-culture=@ci.Name 
+                   asp-controller="home"
+                   asp-action="Index">@ci.NativeName</a>
+            }
+        }
+    </ul>
+</div>

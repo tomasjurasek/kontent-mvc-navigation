@@ -1,7 +1,7 @@
 ﻿@model KenticoKontentModels.Coffee
 
 <div style="margin:auto; text-align:center; width:80%;">
-    <a asp-route="show-coffee" asp-route-url_pattern=@Model.UrlPattern>
+    <a asp-controller="coffees" asp-action="show" asp-route-url_pattern=@Model.UrlPattern>
         <h3>@Model.ProductName</h3>
     </a>
     <div>

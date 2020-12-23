@@ -6,9 +6,7 @@
 
 <ul>
     <li>
-        <a asp-controller="Home"
-           asp-action="Index"
-           asp-protocol="https">@Model.Title</a>
+        <a asp-controller="Home" asp-action="Index">@Model.Title</a>
     </li>
 @foreach (Page page in Model.Subpages)
 {

@@ -1,13 +1,13 @@
 ﻿@model KenticoKontentModels.Article
 
-<div style="margin:auto; text-align:center; width:80%;">
-    <a asp-route="show-article" asp-route-url_pattern=@Model.UrlPattern>
-        <h3>@Model.Title</h3>
-    </a>
-    <div>
-        <img src=@Model.TeaserImage.FirstOrDefault().Url height="50%" width="50%" />
+    <div style="margin:auto; text-align:center; width:80%;">
+        <a asp-controller="articles" asp-action="show" asp-route-url_pattern=@Model.UrlPattern>
+            <h3>@Model.Title</h3>
+        </a>
+        <div>
+            <img src=@Model.TeaserImage.FirstOrDefault().Url height="50%" width="50%" />
+        </div>
+        <div>
+            @Model.Summary
+        </div>
     </div>
-    <div>
-        @Model.Summary
-    </div>
-</div>

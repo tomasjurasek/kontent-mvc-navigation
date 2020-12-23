@@ -4,33 +4,23 @@
     Layout = null;
 }
 
-<!-- Render 404 for content items with "ShowInNavigation" enabled
-     but no corresponding "Page" or "Content" data in Kontent -->
-@if (Model.Content.Count() == 0 && Model.Subpages.Count() == 0)
+@if (Model.Content.Count() > 0 || Model.Subpages.Count() > 0)
 {
-    <li>
-        <a asp-controller="Errors" 
-           asp-action="Error" 
-           asp-route-code="404">@Model.Title</a>
-    </li>
-}
-else
-{
-    <li>
-        <a asp-route=@Model.Url>@Model.Title</a>
+<li>
+    <a asp-controller=@Model.System.Codename asp-action="Index">@Model.Title</a>
 
-        @* Check for nested navigation items *@
-        @if (Model.Subpages.Count() > 0)
-        {
-            <ul>
-                @foreach (Page page in Model.Subpages)
+    @* Check for nested navigation items *@
+    @if (Model.Subpages.Count() > 0)
+    {
+        <ul>
+            @foreach (Page page in Model.Subpages)
+            {
+                if (page.ShowInNavigation.FirstOrDefault().Codename == "yes")
                 {
-                    if (page.ShowInNavigation.FirstOrDefault().Codename == "yes")
-                    {
-                        @Html.DisplayFor(vm => page, "NavigationLevelTwo")
-                    }
+                    @Html.DisplayFor(vm => page, "NavigationLevelTwo")
                 }
-            </ul>
-        }
-    </li>
+            }
+        </ul>
+    }
+</li>
 }

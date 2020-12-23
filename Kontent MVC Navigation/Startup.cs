@@ -9,13 +9,11 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Localization;
 using Kentico.Kontent.Delivery.Abstractions;
 using Kentico.Kontent.Delivery.Extensions;
 using KenticoKontentModels;
 using Kontent_MVC_Navigation.Infrastructure;
 using Kentico.AspNetCore.LocalizedRouting.Extensions;
-using Kentico.AspNetCore.LocalizedRouting;
 
 namespace Kontent_MVC_Navigation
 {
@@ -38,7 +36,7 @@ namespace Kontent_MVC_Navigation
             services.AddSingleton<ITypeProvider, CustomTypeProvider>()
                     .AddDeliveryClient(Configuration);
 
-
+            // Localization
             services.AddLocalization();
             services.ConfigureRequestLocalization("en-US", "es-ES");
             services.AddSingleton<CustomLocalizedRoutingTranslationTransformer>();
@@ -62,8 +60,7 @@ namespace Kontent_MVC_Navigation
                 app.UseHsts();
             }
 
-            app.UseStatusCodePagesWithReExecute("/error/{0}");
-            app.UseExceptionHandler("/error/500");
+            app.UseStatusCodePagesWithReExecute($"/Errors/NotFound");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -75,8 +72,8 @@ namespace Kontent_MVC_Navigation
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDynamicControllerRoute<CustomLocalizedRoutingTranslationTransformer>("{culture=en-US}/{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute("default", "{culture=en-US}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDynamicControllerRoute<CustomLocalizedRoutingTranslationTransformer>("{culture=en-US}/{controller=Home}/{action=Index}/{url_pattern?}");
+                endpoints.MapControllerRoute("default", "{culture=en-US}/{controller=Home}/{action=Index}/{url_pattern?}");
             });
         }
     }

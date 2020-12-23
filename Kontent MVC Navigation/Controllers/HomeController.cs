@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Kontent_MVC_Navigation.Models;
 using Kentico.Kontent.Delivery.Abstractions;
+using Kentico.AspNetCore.LocalizedRouting.Attributes;
 
 namespace Kontent_MVC_Navigation.Controllers
 {
+    [LocalizedRoute("en-US", "home")]
+    [LocalizedRoute("es-ES", "inicio")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -22,8 +25,10 @@ namespace Kontent_MVC_Navigation.Controllers
             _deliveryClient = deliveryClient;
         }
 
-        [Route("")]
-        [Route("home")]
+        //[Route("")]
+        //[Route("home")]
+        [LocalizedRoute("en-US", "")]
+        [LocalizedRoute("es-ES", "")]
         public IActionResult Index()
         {
             return View();

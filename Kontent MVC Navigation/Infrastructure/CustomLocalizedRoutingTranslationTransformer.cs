@@ -9,6 +9,7 @@ namespace Kontent_MVC_Navigation.Infrastructure
     public class CustomLocalizedRoutingTranslationTransformer : DynamicRouteValueTransformer
     {
         private ILocalizedRoutingDynamicRouteValueResolver _localizedRoutingDynamicRouteValueResolver;
+
         public CustomLocalizedRoutingTranslationTransformer(ILocalizedRoutingDynamicRouteValueResolver localizedRoutingDynamicRouteValueResolver)
         {
             _localizedRoutingDynamicRouteValueResolver = localizedRoutingDynamicRouteValueResolver;
