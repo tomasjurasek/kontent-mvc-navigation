@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Kontent_MVC_Navigation.Controllers
 {
-    public class ProductCatalogController : Controller
+    public class ProductsController : Controller
     {
         [Route("product-catalog", Name = "product-catalog")]
         public IActionResult Index()
