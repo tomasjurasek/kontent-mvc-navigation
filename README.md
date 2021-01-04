@@ -18,8 +18,27 @@ To run the app:
    1. Alternatively, you can download the repo as a ZIP file, however, this will not adapt line endings in downloaded files to your platform (Windows, Unix).
 1. Open the solution in Visual Studio.
 
-### Connecting to your sample project
-If you already have a [Kentico Kontent account](https://app.kontent.ai), you can connect this sample application to your version of the _Sample project_.
+### Importing the blog post project
+To import the sample project:
+
+1. Go to app.kontent.ai and create empty project
+
+1. Go to "Project Settings", note the _Project ID_ and _Management API_ keys for later use
+
+1. Install the [Kontent Backup Manager](https://github.com/Kentico/kontent-backup-manager-js) and import data to newly created project from the [part_one_backup.zip](https://github.com/kentico-michaelb/kontent-mvc-navigation/blob/PartOne/part_one_backup.zip) file (place appropriate values for apiKey and projectId arguments):
+
+    ```sh
+    npm i -g @kentico/kontent-backup-manager
+
+    kbm --action=restore --apiKey=<Management API key> --projectId=<Project ID> --zipFilename=part_one_backup
+    ```
+
+    > Alternatively, you can use the Template Manager UI for importing the content.
+
+Go to your Kontent project and publish all the imported items.
+
+### Connecting to the sample project
+Perform the following steps to connect your MVC application to the imported project:
 
 1. In Kentico Kontent, choose _Project settings_ from the app menu.
 1. Under _Production Environment Settings_, choose _API keys_ and copy the *Project ID*.
@@ -58,7 +77,3 @@ Web Spotlight uses Kentico Kontent's "Preview" functionality in order to show th
 More details about setting up preview and Web Spotlight can be seen in the [official Kentico Kontent documentation.](https://docs.kontent.ai/tutorials/develop-apps/build-strong-foundation/set-up-preview "Kontent Documentation - set up preview for content items")
 
 > **Note:** Preview URLs require an `https://` protocol and a URL accessible to Kontent. Without a valid SSL certificate, Kontent responds with secure connection errors. When developing apps locally, see how to [serve pages over HTTPS](https://create-react-app.dev/docs/using-https-in-development/) in combination with [ngrok](https://ngrok.com/docs)'s forwarded address.
-
-### Importing the blog post boilerplate
-
-> :warning: Under construction
