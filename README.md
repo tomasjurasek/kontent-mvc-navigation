@@ -33,7 +33,7 @@ To import the sample project:
     kbm --action=restore --apiKey=<Management API key> --projectId=<Project ID> --zipFilename=part_one_backup
     ```
 
-    > Alternatively, you can use the Template Manager UI for importing the content.
+    > Alternatively, you can use the [Template Manager UI](https://github.com/Kentico/kontent-template-manager) for importing the content.
 
 Go to your Kontent project and publish all the imported items.
 
