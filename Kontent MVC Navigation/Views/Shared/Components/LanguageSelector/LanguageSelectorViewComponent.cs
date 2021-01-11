@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Kontent_MVC_Navigation.Models;
-using Kentico.AspNetCore.LocalizedRouting;
+using AspNetCore.Mvc.Routing.Localization;
 
 namespace Kontent_MVC_Navigation.Views.Shared.Components.LanguageSelector
 {
@@ -33,21 +33,21 @@ namespace Kontent_MVC_Navigation.Views.Shared.Components.LanguageSelector
             var translatedController = await _localizedRoutingProvider.ProvideRouteAsync(
                 currentUICulture.Name,
                 currentController,
-                currentController, 
-                ProvideRouteType.OriginalToTranslated);
+                currentAction, 
+                LocalizationDirection.OriginalToTranslated);
 
             var translatedAction = await _localizedRoutingProvider.ProvideRouteAsync(
                 currentUICulture.Name,
-                currentAction,
                 currentController,
-                ProvideRouteType.OriginalToTranslated);
+                currentAction,
+                LocalizationDirection.OriginalToTranslated);
 
             var languageSwitcher = new LanguageSwitcher
             {
                 SupportedCultures = _localizationOptions.Value.SupportedCultures.ToList(),
                 CurrentUICulture = currentUICulture,
-                CurrentController = translatedController.ToLower(),
-                CurrentAction = translatedAction.ToLower(),
+                CurrentController = translatedController.Controller,
+                CurrentAction = translatedAction.Action,
                 CurrentPath = this.HttpContext.Request.Path
             };
 

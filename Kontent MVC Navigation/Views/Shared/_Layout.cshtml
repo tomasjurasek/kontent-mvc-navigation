@@ -11,12 +11,13 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                @* Kontent navgation - invokes component in:
-        ~/Views/Shared/Components/Navigation/
-                *@
-
-                @await Component.InvokeAsync("LanguageSelector")
-                @await Component.InvokeAsync("Navigation")
+                <div>
+                    @* Kontent navgation - invokes component in:~/Views/Shared/Components/Navigation/*@
+                    @await Component.InvokeAsync("Navigation")
+                </div>                <div>
+                    @* Language selector - invokes component in:~/Views/Shared/Components/LanguageSelector/*@
+                    @await Component.InvokeAsync("LanguageSelector")
+                </div>
             </div>
         </nav>
     </header>

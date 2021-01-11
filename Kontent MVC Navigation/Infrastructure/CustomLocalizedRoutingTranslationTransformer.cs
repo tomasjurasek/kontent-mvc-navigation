@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.Routing;
-using Kentico.AspNetCore.LocalizedRouting;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Http;
+using AspNetCore.Mvc.Routing.Localization;
+using System;
 
 namespace Kontent_MVC_Navigation.Infrastructure
 {
@@ -16,7 +17,15 @@ namespace Kontent_MVC_Navigation.Infrastructure
         }
         public override async ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values)
         {
-            return await _localizedRoutingDynamicRouteValueResolver.ResolveAsync(values);
+            try
+            {      
+                return await _localizedRoutingDynamicRouteValueResolver.ResolveAsync(values);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return values;
+            }
         }
     }
 }

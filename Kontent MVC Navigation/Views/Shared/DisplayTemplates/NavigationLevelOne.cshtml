@@ -7,7 +7,7 @@
 @if (Model.Content.Count() > 0 || Model.Subpages.Count() > 0)
 {
 <li>
-    <a asp-controller=@Model.System.Codename asp-action="Index">@Model.Title</a>
+    <localized-route asp-controller=@Model.PageCodename asp-action="Index">@Model.Title</localized-route>
 
     @* Check for nested navigation items *@
     @if (Model.Subpages.Count() > 0)

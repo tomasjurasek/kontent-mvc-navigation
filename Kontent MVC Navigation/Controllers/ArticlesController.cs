@@ -6,15 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Kentico.Kontent.Delivery.Abstractions;
 using Kentico.Kontent.Delivery.Urls.QueryParameters.Filters;
 using KenticoKontentModels;
-using Kentico.AspNetCore.LocalizedRouting.Attributes;
 using Kentico.Kontent.Delivery.Urls.QueryParameters;
 using System.Threading;
 using System.Globalization;
+using AspNetCore.Mvc.Routing.Localization.Attributes;
+
+using static Kontent_MVC_Navigation.Configuration.Constants;
 
 namespace Kontent_MVC_Navigation.Controllers
 {
-    [LocalizedRoute("en-US", "articles")]
-    [LocalizedRoute("es-ES", "articulos")]
+    [LocalizedRoute(EnglishCulture, "articles")]
+    [LocalizedRoute(SpanishCulture, "articulos")]
     public class ArticlesController : Controller
     {
         private readonly IDeliveryClient _deliveryClient;
@@ -24,8 +26,6 @@ namespace Kontent_MVC_Navigation.Controllers
             _deliveryClient = deliveryClient;
         }
 
-        [LocalizedRoute("en-US", "")]
-        [LocalizedRoute("es-ES", "")]
         public async Task<IActionResult> Index()
         {
             var response = await _deliveryClient.GetItemsAsync<Article>(
@@ -42,13 +42,13 @@ namespace Kontent_MVC_Navigation.Controllers
             }
             else
             {
-                return NotFound(404);
+                return NotFound();
             }
 
         }
 
-        [LocalizedRoute("en-US", "show")]
-        [LocalizedRoute("es-ES", "mostrar")]
+        [LocalizedRoute(EnglishCulture, "show")]
+        [LocalizedRoute(SpanishCulture, "mostrar")]
         public async Task<IActionResult> Show(string url_pattern)
         {
             if(url_pattern != null) { 

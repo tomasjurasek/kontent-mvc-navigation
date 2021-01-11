@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Kentico.AspNetCore.LocalizedRouting.Attributes;
+using AspNetCore.Mvc.Routing.Localization.Attributes;
 using Kentico.Kontent.Delivery.Abstractions;
 using Kentico.Kontent.Delivery.Urls.QueryParameters;
 using Kentico.Kontent.Delivery.Urls.QueryParameters.Filters;
 using KenticoKontentModels;
 using Microsoft.AspNetCore.Mvc;
 
+using static Kontent_MVC_Navigation.Configuration.Constants;
+
 namespace Kontent_MVC_Navigation.Controllers
 {
 
-    [LocalizedRoute("en-US", "products")]
-    [LocalizedRoute("es-ES", "productos")]
+    [LocalizedRoute(EnglishCulture, "products")]
+    [LocalizedRoute(SpanishCulture, "productos")]
     public class ProductsController : Controller
     {
         private readonly IDeliveryClient _deliveryClient;
@@ -23,11 +26,12 @@ namespace Kontent_MVC_Navigation.Controllers
             _deliveryClient = deliveryClient;
         }
 
-        [LocalizedRoute("en-US", "")]
-        [LocalizedRoute("es-ES", "")]
         public async Task<IActionResult> Index()
         {
-            var response = await _deliveryClient.GetItemAsync<Page>("products", new DepthParameter(2));
+            var response = await _deliveryClient.GetItemAsync<Page>("products", new DepthParameter(2),
+                new EqualsFilter("system.language", CultureInfo.CurrentCulture.Name), // disable language fallback
+                new LanguageParameter(CultureInfo.CurrentCulture.Name)
+                );
 
             var products = response.Item;
 
@@ -37,7 +41,7 @@ namespace Kontent_MVC_Navigation.Controllers
             }
             else
             {
-                return NotFound(404);
+                return NotFound();
             }
         }
     }

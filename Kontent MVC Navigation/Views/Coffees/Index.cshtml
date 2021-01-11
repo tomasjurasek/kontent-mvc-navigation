@@ -4,8 +4,6 @@
     ViewBag.Title = "Coffees";
 }
 
-<h3>Coffees</h3>
-
 @foreach (Coffee coffee in Model)
 {
     @Html.DisplayFor(vm => coffee, "CoffeeListing")

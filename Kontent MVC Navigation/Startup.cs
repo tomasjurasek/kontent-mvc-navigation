@@ -13,7 +13,9 @@ using Kentico.Kontent.Delivery.Abstractions;
 using Kentico.Kontent.Delivery.Extensions;
 using KenticoKontentModels;
 using Kontent_MVC_Navigation.Infrastructure;
-using Kentico.AspNetCore.LocalizedRouting.Extensions;
+using AspNetCore.Mvc.Routing.Localization.Extensions;
+
+using static Kontent_MVC_Navigation.Configuration.Constants;
 
 namespace Kontent_MVC_Navigation
 {
@@ -37,8 +39,9 @@ namespace Kontent_MVC_Navigation
                     .AddDeliveryClient(Configuration);
 
             // Localization
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.AddLocalization();
-            services.ConfigureRequestLocalization("en-US", "es-ES");
+            services.ConfigureRequestLocalization(EnglishCulture, SpanishCulture);
             services.AddSingleton<CustomLocalizedRoutingTranslationTransformer>();
             services.AddControllersWithViews();
             services.AddLocalizedRouting();
@@ -55,12 +58,11 @@ namespace Kontent_MVC_Navigation
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseExceptionHandler($"/{DefaultCulture}/Errors/NotFound");
                 app.UseHsts();
             }
 
-            app.UseStatusCodePagesWithReExecute($"/Errors/NotFound");
+            app.UseStatusCodePagesWithReExecute($"/{DefaultCulture}/Errors/NotFound");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -72,8 +74,8 @@ namespace Kontent_MVC_Navigation
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDynamicControllerRoute<CustomLocalizedRoutingTranslationTransformer>("{culture=en-US}/{controller=Home}/{action=Index}/{url_pattern?}");
-                endpoints.MapControllerRoute("default", "{culture=en-US}/{controller=Home}/{action=Index}/{url_pattern?}");
+                endpoints.MapDynamicControllerRoute<CustomLocalizedRoutingTranslationTransformer>("{culture=" + DefaultCulture + "}/{controller=Home}/{action=Index}/{url_pattern?}");
+                endpoints.MapControllerRoute(name: "default", pattern: "{culture=" + DefaultCulture + "}/{controller=Home}/{action=Index}/{url_pattern?}");
             });
         }
     }

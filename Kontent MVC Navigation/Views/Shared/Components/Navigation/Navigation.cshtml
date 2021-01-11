@@ -6,7 +6,7 @@
 
 <ul>
     <li>
-        <a asp-controller="Home" asp-action="Index">@Model.Title</a>
+        <localized-route asp-controller="Home" asp-action="Index">@Model.Title</localized-route>
     </li>
 @foreach (Page page in Model.Subpages)
 {

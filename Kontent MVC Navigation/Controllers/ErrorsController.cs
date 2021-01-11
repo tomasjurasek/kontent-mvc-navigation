@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Kentico.AspNetCore.LocalizedRouting.Attributes;
+﻿using AspNetCore.Mvc.Routing.Localization.Attributes;
 using Microsoft.AspNetCore.Mvc;
+
+using static Kontent_MVC_Navigation.Configuration.Constants;
 
 namespace Kontent_MVC_Navigation.Controllers
 {
-    [LocalizedRoute("en-US", "errors")]
-    [LocalizedRoute("es-ES", "errores")]
+    [LocalizedRoute(EnglishCulture, "errors")]
+    [LocalizedRoute(SpanishCulture, "errores")]
     public class ErrorsController : Controller
     {
-        [LocalizedRoute("en-US", "")]
-        [LocalizedRoute("es-ES", "")]
         public new IActionResult NotFound()
         {
             return View();

@@ -1,9 +1,9 @@
 ﻿@model KenticoKontentModels.Brewer
 
 <div style="margin:auto; text-align:center; width:80%;">
-    <a asp-controller="brewers" asp-action="show" asp-route-url_pattern=@Model.UrlPattern>
+    <localized-route asp-controller="Brewers" asp-action="Show" asp-route-url_pattern=@Model.UrlPattern>
         <h3>@Model.ProductName</h3>
-    </a>
+    </localized-route>
     <div>
         <img src=@Model.Image.FirstOrDefault().Url height="50%" width="50%" />
     </div>
