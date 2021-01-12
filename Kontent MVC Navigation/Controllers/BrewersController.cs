@@ -18,7 +18,7 @@ namespace Kontent_MVC_Navigation.Controllers
             _deliveryClient = deliveryClient;
         }
 
-        [Route("product-catalog/brewers", Name = "brewers")]
+        [Route("products/brewers", Name = "brewers")]
         public async Task<IActionResult> Index()
         {
             var response = await _deliveryClient.GetItemsAsync<Brewer>(
@@ -30,7 +30,7 @@ namespace Kontent_MVC_Navigation.Controllers
             return View(brewers);
         }
 
-        [Route("product-catalog/brewers/{url_pattern}", Name = "show-brewer")]
+        [Route("products/brewers/{url_pattern}", Name = "show-brewer")]
         public async Task<IActionResult> Show(string url_pattern)
         {
             var response = await _deliveryClient.GetItemsAsync<Brewer>(
