@@ -11,13 +11,13 @@
             {
                 if (Model.CurrentController != null && Model.CurrentAction != null)
                 {
-            <li>@Html.ActionLink(ci.NativeName, Model.CurrentAction, Model.CurrentController, new { culture = ci.Name })</li>
+                    <li>@Html.ActionLink(ci.NativeName.Substring(0, ci.NativeName.IndexOf("(")), Model.CurrentAction, Model.CurrentController, new { culture = ci.Name })</li>
                 }
                 else
                 {
                     <li>
                         <localized-route asp-controller="Home" asp-action="Index">
-                            @ci.NativeName
+                            @ci.NativeName.Substring(0, ci.NativeName.IndexOf("("))
                         </localized-route>
                     </li>
                 }
