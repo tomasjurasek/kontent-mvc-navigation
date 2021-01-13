@@ -21,9 +21,17 @@ To run the app:
 ### Importing the blog post project
 To import the sample project:
 
-1. Go to app.kontent.ai and create an empty project
+1. Go to app.kontent.ai and [create an empty project](https://docs.kontent.ai/tutorials/manage-kontent/projects/manage-projects#a-creating-projects)
 
-1. Go to "Project Settings", note the _Project ID_ and _Management API_ keys for later use
+1. Go to _Project Settings_ > _Localization_
+    - Edit "Default Language" to be:
+        - **Language name:** English (United States)
+        - **Codename:** en-US
+    - Create new language:
+        - **Language name:** Spanish (Spain)
+        - **Codename:** es-ES
+
+1. Go to _Project Settings_ > _API Keys_, note the _Project ID_ and _Management API_ keys for later use
 
 1. Install the [Kontent Backup Manager](https://github.com/Kentico/kontent-backup-manager-js) and import data to newly created project from the [part_three_backup.zip](https://github.com/kentico-michaelb/kontent-mvc-navigation/blob/PartThree/part_three_backup.zip) file (place appropriate values for apiKey and projectId arguments):
 
