@@ -26,8 +26,8 @@ namespace Kontent_MVC_Navigation.Views.Shared.Components.LanguageSelector
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var currentUICulture = CultureInfo.CurrentUICulture;
-            var currentController = this.HttpContext.Request.RouteValues["controller"].ToString();
-            var currentAction = this.HttpContext.Request.RouteValues["action"].ToString();
+            var currentController = HttpContext.Request.RouteValues["controller"].ToString();
+            var currentAction = HttpContext.Request.RouteValues["action"].ToString();
 
 
             var translatedController = await _localizedRoutingProvider.ProvideRouteAsync(

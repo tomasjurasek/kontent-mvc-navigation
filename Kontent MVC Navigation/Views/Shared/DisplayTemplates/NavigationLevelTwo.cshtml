@@ -3,8 +3,6 @@
     Layout = null;
 }
 
-<!-- Render 404 for content items with "ShowInNavigation" enabled
-     but no corresponding "Page" or "Content" data in Kontent -->
 @if (Model.Content.Count() > 0 || Model.Subpages.Count() > 0)
 {
     <li>
