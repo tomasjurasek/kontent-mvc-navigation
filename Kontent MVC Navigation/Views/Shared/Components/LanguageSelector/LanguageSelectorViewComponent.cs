@@ -29,14 +29,7 @@ namespace Kontent_MVC_Navigation.Views.Shared.Components.LanguageSelector
             var currentController = HttpContext.Request.RouteValues["controller"].ToString();
             var currentAction = HttpContext.Request.RouteValues["action"].ToString();
 
-
-            var translatedController = await _localizedRoutingProvider.ProvideRouteAsync(
-                currentUICulture.Name,
-                currentController,
-                currentAction, 
-                LocalizationDirection.OriginalToTranslated);
-
-            var translatedAction = await _localizedRoutingProvider.ProvideRouteAsync(
+            var translation = await _localizedRoutingProvider.ProvideRouteAsync(
                 currentUICulture.Name,
                 currentController,
                 currentAction,
@@ -46,8 +39,8 @@ namespace Kontent_MVC_Navigation.Views.Shared.Components.LanguageSelector
             {
                 SupportedCultures = _localizationOptions.Value.SupportedCultures.ToList(),
                 CurrentUICulture = currentUICulture,
-                CurrentController = translatedController.Controller,
-                CurrentAction = translatedAction.Action,
+                CurrentController = translation.Controller,
+                CurrentAction = translation.Action,
                 CurrentPath = this.HttpContext.Request.Path
             };
 
