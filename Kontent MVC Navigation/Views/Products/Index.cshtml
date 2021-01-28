@@ -1,9 +1,0 @@
-﻿@using KenticoKontentModels
-@model Page
-
-@foreach(Page product in Model.Subpages)
-{
-<div>
-    <h3><a asp-controller=@product.Url asp-action="Index">@product.Title</a></h3>
-</div>
-}

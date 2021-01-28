@@ -21,8 +21,10 @@ namespace KenticoKontentModels
             {typeof(Home), "home"},
             {typeof(Homepage), "homepage"},
             {typeof(HostedVideo), "hosted_video"},
+            {typeof(ListingPageContent), "listing_page_content"},
             {typeof(Office), "office"},
             {typeof(Page), "page"},
+            {typeof(RedirectionUrl), "redirection_url"},
             {typeof(Tweet), "tweet"}
         };
 

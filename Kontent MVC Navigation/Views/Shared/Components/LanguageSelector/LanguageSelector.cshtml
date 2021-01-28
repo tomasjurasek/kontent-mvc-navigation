@@ -10,8 +10,8 @@
                 if (Model.CurrentController != null && Model.CurrentAction != null)
                 {
                     <li>
-                        <a asp-controller=@Model.CurrentController asp-action=@Model.CurrentAction 
-                           asp-route-culture=@ci.Name>
+                        <a asp-controller=@Model.CurrentController asp-action=@Model.CurrentAction
+                                         asp-route-culture=@ci.Name>
                             @ci.NativeName.Substring(0, ci.NativeName.IndexOf("("))
                         </a>
                     </li>

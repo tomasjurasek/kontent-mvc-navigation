@@ -12,6 +12,7 @@ using System.Globalization;
 using AspNetCore.Mvc.Routing.Localization.Attributes;
 
 using static Kontent_MVC_Navigation.Configuration.Constants;
+using Kontent_MVC_Navigation.Models;
 
 namespace Kontent_MVC_Navigation.Controllers
 {
@@ -28,17 +29,27 @@ namespace Kontent_MVC_Navigation.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var response = await _deliveryClient.GetItemsAsync<Article>(
+            var articleResponse = await _deliveryClient.GetItemsAsync<Article>(
                 new EqualsFilter("system.type", "article"),
                 new EqualsFilter("system.language", CultureInfo.CurrentCulture.Name), // disable language fallback
                 new LanguageParameter(CultureInfo.CurrentCulture.Name)
                 );
 
-            var articles = response.Items;
+            var articles = articleResponse.Items;
 
+            var articlesContentResponse = await _deliveryClient.GetItemAsync<ListingPageContent>("article_listing_page",
+                new LanguageParameter(CultureInfo.CurrentCulture.Name)
+                );
+            
             if (articles.Count > 0)
             {
-                return View(articles);
+                var articleListing = new ListingViewModel
+                {
+                    Content = articlesContentResponse.Item,
+                    RelatedItems = articleResponse.Items
+                };
+
+                return View(articleListing);
             }
             else
             {

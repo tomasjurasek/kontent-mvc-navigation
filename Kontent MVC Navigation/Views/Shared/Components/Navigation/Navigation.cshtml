@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-<ul>
+<ul class="nav navbar-nav">
     <li>
         <localized-route asp-controller="Home" asp-action="Index">@Model.Title</localized-route>
     </li>
@@ -12,7 +12,7 @@
 {
     if (page.ShowInNavigation.FirstOrDefault().Codename == "yes")
     {
-        @Html.DisplayFor(vm => page, "NavigationLevelOne")
+        @Html.DisplayFor(vm => page, "NavigationDisplay")
     }
 }
 </ul>
