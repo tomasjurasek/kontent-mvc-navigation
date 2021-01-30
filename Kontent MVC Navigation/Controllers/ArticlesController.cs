@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Kentico.Kontent.Delivery.Abstractions;
 using Kentico.Kontent.Delivery.Urls.QueryParameters.Filters;
 using KenticoKontentModels;
 using Kentico.Kontent.Delivery.Urls.QueryParameters;
-using System.Threading;
 using System.Globalization;
 using AspNetCore.Mvc.Routing.Localization.Attributes;
 

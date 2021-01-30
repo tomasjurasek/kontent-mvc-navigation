@@ -29,6 +29,12 @@ namespace Kontent_MVC_Navigation.Views.Shared.Components.Navigation
                 );
 
             var homepage = response.Item;
+            homepage.Subpages = homepage.Subpages
+                .Where(s => s.PageCodename == "Articles" || 
+                s.PageCodename == "Products" || 
+                s.PageCodename == "Brewers" || 
+                s.PageCodename == "Coffees" || 
+                s.PageCodename == "Home");
 
             return View("Navigation", homepage);
         }
